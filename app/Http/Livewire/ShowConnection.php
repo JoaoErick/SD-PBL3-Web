@@ -3,10 +3,16 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use App\Models\Connection;
 
 class ShowConnection extends Component
 {
-    public $teste = 0;
+    public $teste;
+
+    public function mount()
+    {
+        $this->teste = Connection::get()->first();
+    }
 
     public function soma(){
         $this->teste += 1;
