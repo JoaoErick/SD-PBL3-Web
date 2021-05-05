@@ -1,0 +1,22 @@
+.title-interval{
+    color: #b9c6d1;
+    font-size: 16pt;
+    margin-bottom: 10px;
+}
+
+.btn-interval{
+    background-color: #e8bb1c;
+    color: #fff;
+    border-radius: 6px;
+    margin-left: 10px;
+    transition: 0.5s;
+}
+
+.btn-interval:hover{
+    background-color: #cca517;
+    color: #fff;
+}
+
+.row-interval{
+    margin-top: 60pt;
+}

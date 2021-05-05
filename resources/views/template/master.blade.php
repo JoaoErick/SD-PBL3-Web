@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{{ asset('css/master.css') }}">
     @yield('content-css')
 </head>
-<body style="background-color: #183153">
+<body style="background-color: #183153; height: 100vh">
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #001c40">
         <div class="container-fluid">
             <a class="mx-3 navbar-brand" href="{{ route('home') }}">
@@ -25,13 +25,18 @@
           <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="">
+                <a class="nav-link active" aria-current="page" href="{{ route('home') }}">
                     Home
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="{{ route('interval') }}">
                   Ajustes
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ route('historic') }}">
+                  Histórico
                 </a>
               </li>
             </ul>
