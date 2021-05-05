@@ -1,0 +1,43 @@
+thead, .total{
+    background-color: #001c40 !important;
+    color: #b9c6d1;
+}
+
+tbody{
+    color: #fff;
+}
+
+thead tr th, tbody tr th{
+    text-align: center;
+}
+
+.refresh-icon{
+    font-size: 20pt;
+    color: #fff;
+    transition: .3s;
+}
+
+.refresh-icon:hover{
+    color: rgb(185, 185, 185);
+    cursor: pointer;
+}
+
+.mt-custom {
+    margin-top: 8rem!important;
+}
+
+@media (max-width: 425px) {
+    .mt-custom {
+        margin-top: 5rem!important;
+    }
+
+    .table-font-size-custom {
+        font-size: 10pt;
+    }
+}
+
+@media (max-width: 767px) {
+    .custom-width {
+        width: 50% !important;
+    }
+}
