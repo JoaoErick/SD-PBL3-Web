@@ -25,13 +25,18 @@
           <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="">
+                <a class="nav-link active" aria-current="page" href="{{ route('home') }}">
                     Home
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="{{ route('interval') }}">
                   Ajustes
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ route('historic') }}">
+                  Histórico
                 </a>
               </li>
             </ul>

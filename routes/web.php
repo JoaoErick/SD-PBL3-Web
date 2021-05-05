@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ConnectionController;
+use App\Http\Controllers\IntervalController;
+use App\Http\Controllers\HistoricController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,5 +20,12 @@ use App\Http\Controllers\ConnectionController;
 /*-------------------- Página principal --------------------------------------*/
 /*Rota para acessar a página principal */
 Route::get('/',[HomeController::class,'index'])->name('home');
+
 Route::post('/',[ConnectionController::class,'verifyConnection'])->name('verifyConnection');
 
+Route::get('/interval',[IntervalController::class,'index'])->name('interval');
+
+Route::post('/Interval',[IntervalController::class,'setInterval'])->name('setInterval');
+
+Route::get('/historic',[HistoricController::class,'index'])->name('historic');
+Route::post('/historic/refresh', [HistoricController::class, 'refresh'])->name('refresh');
