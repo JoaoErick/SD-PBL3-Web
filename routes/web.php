@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ConnectionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,5 @@ use App\Http\Controllers\HomeController;
 /*-------------------- Página principal --------------------------------------*/
 /*Rota para acessar a página principal */
 Route::get('/',[HomeController::class,'index'])->name('home');
+Route::post('/',[ConnectionController::class,'verifyConnection'])->name('verifyConnection');
+
