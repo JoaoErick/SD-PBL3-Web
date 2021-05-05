@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Connection;
 
 class HomeController extends Controller
 {
@@ -11,6 +12,7 @@ class HomeController extends Controller
     */
     public function index()
     {
-        return view('home');
+        $connection = Connection::get()->first();
+        return view('home', ['status' => $connection->status]);
     }
 }
