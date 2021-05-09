@@ -17,7 +17,7 @@
             <span class="title-interval">{{$interval}}</span> 
         </div>
         <div class="col-md-4 offset-md-4 d-flex justify-content-center align-items-center col-title">
-            <input class="form-control" type="time" min="00:00:06" step="1" name="time" id="" required>
+            <input class="form-control" type="time" min="00:00:15" step="1" name="time" id="" required>
             <button class="btn btn-interval" type="submit">Alterar</button>
         </div>
     </div>
@@ -27,6 +27,15 @@
     <div class="row d-flex justify-content-center mt-5">
         <div class="alert alert-light alert-dismissible fade show w-50" role="alert">
             <strong>{{ Session::get('success') }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+@endif
+
+@if (Session::has('error'))
+    <div class="row d-flex justify-content-center mt-5">
+        <div class="alert alert-danger alert-dismissible fade show w-50" role="alert">
+            <strong>{{ Session::get('error') }}</strong>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     </div>
