@@ -11,16 +11,9 @@ class HistoricController extends Controller
     * Função que retorna a página de histórico.
     */
     public function index(){
-        $historics = Historic::orderBy('id', 'desc')->get();
-        return view('historic.index', compact('historics'));
-    }
+        $timestamp = \Carbon\Carbon::now("America/Sao_Paulo")->format('Y-m-d');
+        $historics = Historic::where("created_at", "like", "%".$timestamp."%")->orderBy('id', 'desc')->get();
 
-    /**
-     * Função para atualização o histórico.
-     */
-    public function refresh()
-    {
-        $historics = Historic::orderBy('id', 'desc')->get();
         return view('historic.index', compact('historics'));
     }
 }
