@@ -12,21 +12,25 @@ class ConnectionController extends Controller
         $connection = Connection::get()->first();
         $interval = Interval::get()->first();
 
-        $current = strtotime(\Carbon\Carbon::now("America/Sao_Paulo"));
+        $now = \Carbon\Carbon::now("America/Sao_Paulo");
+
+        $current = strtotime($now);
 
         $temp = explode(':', $interval->time);
-        $updated = \Carbon\Carbon::parse($interval->updated_at)->addSeconds((int) $temp[2]);
+        $updated = \Carbon\Carbon::parse($connection->updated_at)->addSeconds((int) $temp[2]);
         $updated = $updated->addMinutes((int) $temp[1]);
         $updated = $updated->addHours((int) $temp[0]);
         $updated = $updated->format('H:i:s');
         
         $updated = strtotime($updated);
         $diff = ($updated - $current);
+
         if($diff < 0){
             $connection->status = false;
-        } else{
-            $connection->status = true;
+            $connection->updated_at = $now;
+            $connection->created_at = $now;
         }
+
         $connection->save();
 
         return view('home', ['status' => $connection->status]);
