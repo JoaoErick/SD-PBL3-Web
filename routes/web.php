@@ -28,4 +28,4 @@ Route::get('/interval',[IntervalController::class,'index'])->name('interval');
 Route::post('/Interval',[IntervalController::class,'setInterval'])->name('setInterval');
 
 Route::get('/historic',[HistoricController::class,'index'])->name('historic');
-Route::post('/historic/refresh', [HistoricController::class, 'refresh'])->name('refresh');
+Route::post('/historic/refresh', [HistoricController::class, 'index'])->name('refresh');
