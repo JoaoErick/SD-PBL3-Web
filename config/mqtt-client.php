@@ -5,6 +5,10 @@ declare(strict_types=1);
 use PhpMqtt\Client\MqttClient;
 use PhpMqtt\Client\Repositories\MemoryRepository;
 
+define("CA_PATH", __DIR__.'/../data/AmazonRootCA1.pem');
+define("CERTIFICATE_PATH",__DIR__.'/../data/5cd1ac92dc-certificate.pem.crt');
+define("PRIVATE_KEY_PATH", __DIR__.'/../data/5cd1ac92dc-private.pem.key');
+
 return [
 
     /*
@@ -65,14 +69,14 @@ return [
 
                 // The TLS settings used for the connection. Must match the specified port.
                 'tls' => [
-                    'enabled' => env('MQTT_TLS_ENABLED', false),
+                    'enabled' => true,
                     'allow_self_signed_certificate' => env('MQTT_TLS_ALLOW_SELF_SIGNED_CERT', false),
                     'verify_peer' => env('MQTT_TLS_VERIFY_PEER', true),
                     'verify_peer_name' => env('MQTT_TLS_VERIFY_PEER_NAME', true),
-                    'ca_file' => env('MQTT_TLS_CA_FILE'),
+                    'ca_file' => CA_PATH,
                     'ca_path' => env('MQTT_TLS_CA_PATH'),
-                    'client_certificate_file' => env('MQTT_TLS_CLIENT_CERT_FILE'),
-                    'client_certificate_key_file' => env('MQTT_TLS_CLIENT_CERT_KEY_FILE'),
+                    'client_certificate_file' => CERTIFICATE_PATH,
+                    'client_certificate_key_file' => PRIVATE_KEY_PATH,
                     'client_certificate_key_passphrase' => env('MQTT_TLS_CLIENT_CERT_KEY_PASSPHRASE'),
                 ],
 
