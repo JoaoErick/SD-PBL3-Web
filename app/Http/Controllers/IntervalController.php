@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Interval;
+use PhpMqtt\Client\Facades\MQTT;
 
 class IntervalController extends Controller
 {
@@ -15,12 +16,22 @@ class IntervalController extends Controller
     public function setInterval(Request $request){
         $interval = Interval::get()->first();
 
-        $interval->time = $request->time;
-        $interval->updated_at = \Carbon\Carbon::now("America/Sao_Paulo");
-        $interval->created_at = \Carbon\Carbon::now("America/Sao_Paulo");
-        $interval->save();
+        $intervalPublish = $this->formatIntervalToPublish($request->time);
 
-        return redirect()->back()->with('success','Intervalo alterado com sucesso!');
+        $this->publish($intervalPublish);
+
+        $status = $this->validateSetInterval();
+
+        if($status == "success"){
+            $interval->time = $request->time;
+            $interval->updated_at = \Carbon\Carbon::now("America/Sao_Paulo");
+            $interval->created_at = \Carbon\Carbon::now("America/Sao_Paulo");
+            $interval->save();
+
+            return redirect()->back()->with('success','Intervalo alterado com sucesso!');
+        } else {
+            return redirect()->back()->with("error", "Falha ao executar a ação!");
+        }
     }
 
     private function formatInterval($time){
@@ -44,5 +55,53 @@ class IntervalController extends Controller
         }
 
         return $interval;
+    }
+
+    /**
+     * Função responsável por formatar o intervalo que será publicado.
+     * @param string      $interval
+     * @return string
+     */
+    private function formatIntervalToPublish($interval)
+    {
+        $temp = explode(":", $interval);
+            
+        if (count($temp) == 3){
+            $intervalFormated = $temp[0]."h".$temp[1]."m".$temp[2]."s";
+        } else if (count($temp) == 2) {
+            $intervalFormated = $temp[0]."h".$temp[1]."m"."00s";
+        }
+
+        return $intervalFormated;
+    }
+
+    /**
+     * Função responsável por publicar o intervalo de verificação de conexão para o tópico.
+     * @param string      $intervalPublish
+     */
+    private function publish($intervalPublish)
+    {
+        $mqtt = MQTT::connection();
+        $mqtt->publish('intervalOutTopic', '{"value": '.$intervalPublish.',}');
+    }
+
+    /**
+     * Função responsável por validar se a ação foi realizada com sucesso.
+     * @return string
+     */
+    private function validateSetInterval()
+    {
+        $mqtt = MQTT::connection();
+
+        $mqtt->subscribe('intervalInTopic', function (string $topic, string $message, bool $retained) use ($mqtt) {
+            $this->message = $message;
+            
+            $mqtt->interrupt();
+        }, 0);
+
+        $mqtt->loop(true);
+        $mqtt->disconnect();
+
+        return $this->message;
     }
 }
