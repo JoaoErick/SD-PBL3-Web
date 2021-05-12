@@ -18,7 +18,7 @@ class IntervalController extends Controller
 
         $intervalPublish = $this->formatIntervalToPublish($request->time);
 
-        $this->publish($intervalPublish);
+        $this->publish('intervalOutTopic', $intervalPublish);
 
         $status = $this->validateSetInterval();
 
@@ -32,6 +32,16 @@ class IntervalController extends Controller
         } else {
             return redirect()->back()->with("error", "Falha ao executar a ação!");
         }
+    }
+
+    public function sync()
+    {
+        $interval = Interval::get()->first();
+        $interval = $this->formatIntervalToPublish($interval->time);
+
+        $this->publish('syncOutTopic', $interval);
+
+        return redirect()->back()->with('success','Intervalo sincronizado com sucesso!');
     }
 
     private function formatInterval($time){
@@ -79,10 +89,10 @@ class IntervalController extends Controller
      * Função responsável por publicar o intervalo de verificação de conexão para o tópico.
      * @param string      $intervalPublish
      */
-    private function publish($intervalPublish)
+    private function publish($topic ,$intervalPublish)
     {
         $mqtt = MQTT::connection();
-        $mqtt->publish('intervalOutTopic', '{"value": '.$intervalPublish.',}');
+        $mqtt->publish($topic, '{"value": '.$intervalPublish.',}');
     }
 
     /**
