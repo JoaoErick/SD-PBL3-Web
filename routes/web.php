@@ -24,8 +24,8 @@ Route::get('/',[HomeController::class,'index'])->name('home');
 Route::post('/',[ConnectionController::class,'verifyConnection'])->name('verifyConnection');
 
 Route::get('/interval',[IntervalController::class,'index'])->name('interval');
-
 Route::post('/Interval',[IntervalController::class,'setInterval'])->name('setInterval');
+Route::post('/interval/sync', [IntervalController::class,'sync'])->name('sync');
 
 Route::get('/historic',[HistoricController::class,'index'])->name('historic');
 Route::post('/historic/refresh', [HistoricController::class, 'index'])->name('refresh');
