@@ -32,19 +32,15 @@ class Interval extends Model
 
         $half_time_seconds = ($hours * 3600 + $minutes * 60 + $seconds)/2;
 
-        return gmdate("H:i:s", $half_time_seconds);
+        return Interval::convertToMilis($half_time_seconds);
     }
 
     /**
      * Função para converter o horário do formato H:m:s para milissegundos
      * @param string       $time
      */
-    public static function convertToMilis($time)
+    private static function convertToMilis($timeInSeconds)
     {
-        $temp = explode(":", $time);
-        
-        $time = $temp[0] * 3600000 + $temp[1] * 60000 + $temp[2] * 1000;
-
-        return $time;
+        return $timeInSeconds * 1000;
     }
 }

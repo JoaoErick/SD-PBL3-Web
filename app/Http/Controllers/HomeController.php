@@ -17,7 +17,6 @@ class HomeController extends Controller
         
         $interval = Interval::get()->first();
         $interval = Interval::halfInterval($interval->time);
-        $interval = Interval::convertToMilis($interval);
 
         return view('home', [
             'status' => $connection->status,

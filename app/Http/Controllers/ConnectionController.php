@@ -33,7 +33,6 @@ class ConnectionController extends Controller
         $connection->save();
 
         $interval = Interval::halfInterval($interval->time);
-        $interval = Interval::convertToMilis($interval);
 
         return view('home', [
             'status' => $connection->status,
