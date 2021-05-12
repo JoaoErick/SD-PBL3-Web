@@ -43,11 +43,21 @@ class IntervalController extends Controller
     public function sync()
     {
         $interval = Interval::get()->first();
+        $alarm = Alarm::get()->first();
+
         $interval = $this->formatIntervalToPublish($interval->time);
 
-        $this->publish('syncOutTopic', $interval);
+        if($alarm->mode){ //Modo Acidente
+            $alarmMode = 1;
+            
+        } else {//Modo Furto
+            $alarmMode = 0;
+        }
 
-        return redirect()->back()->with('success','Intervalo sincronizado com sucesso!');
+        $this->publish('syncIntervalOutTopic', $interval);
+        $this->publish('syncAlarmOutTopic', $alarmMode);
+
+        return redirect()->back()->with('success','Sincronização realizada com sucesso!');
     }
 
     public function alarmMode(Request $request)
@@ -56,12 +66,14 @@ class IntervalController extends Controller
 
         if($request->mode == null){ //Modo Acidente
             $alarm->mode = false;
+            $alarmMode = 0;
             
         } else {//Modo Furto
             $alarm->mode = true;
+            $alarmMode = 1;
         }
 
-        $this->publish('alarmOutTopic', $alarm->mode);
+        $this->publish('alarmOutTopic', $alarmMode);
 
         $status = $this->validatePublish('alarmInTopic');
 
