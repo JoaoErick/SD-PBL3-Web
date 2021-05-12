@@ -8,6 +8,10 @@ use App\Models\Interval;
 
 class ConnectionController extends Controller
 {
+    /**
+     * Função responsável por verificar a se a placa está conectada e 
+     * exibir essa informação no banco de dados.
+     */
     public function verifyConnection(){
         $connection = Connection::get()->first();
         $interval = Interval::get()->first();

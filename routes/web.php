@@ -18,15 +18,18 @@ use App\Http\Controllers\HistoricController;
 */
 
 /*-------------------- Página principal --------------------------------------*/
-/*Rota para acessar a página principal */
 Route::get('/',[HomeController::class,'index'])->name('home');
-
 Route::post('/',[ConnectionController::class,'verifyConnection'])->name('verifyConnection');
+/*----------------------------------------------------------------------------*/
 
+/*-------------------- Página de ajustes -------------------------------------*/
 Route::get('/settings',[IntervalController::class,'index'])->name('interval');
 Route::post('/settings/set-interval',[IntervalController::class,'setInterval'])->name('setInterval');
 Route::post('/settings/sync', [IntervalController::class,'sync'])->name('sync');
 Route::post('/settings/alarm-mode', [IntervalController::class,'alarmMode'])->name('alarmMode');
+/*----------------------------------------------------------------------------*/
 
+/*-------------------- Página de histórico -----------------------------------*/
 Route::get('/historic',[HistoricController::class,'index'])->name('historic');
 Route::post('/historic/refresh', [HistoricController::class, 'index'])->name('refresh');
+/*----------------------------------------------------------------------------*/

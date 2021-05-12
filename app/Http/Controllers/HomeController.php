@@ -7,9 +7,9 @@ use App\Models\Connection;
 
 class HomeController extends Controller
 {
-    /*
-    * Função que retorna a página principal.
-    */
+    /**
+     * Função responsável por retorna a página principal.
+     */
     public function index()
     {
         $connection = Connection::get()->first();

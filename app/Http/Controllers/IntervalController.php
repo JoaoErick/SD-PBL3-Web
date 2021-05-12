@@ -9,6 +9,10 @@ use PhpMqtt\Client\Facades\MQTT;
 
 class IntervalController extends Controller
 {
+    /**
+     * Função Responsável por retornar a página de ajustes com os dados
+     * do banco de dados.
+     */
     public function index(){
         $interval = Interval::get()->first();
         $alarm = Alarm::get()->first();
@@ -19,6 +23,11 @@ class IntervalController extends Controller
         ]);
     }
 
+    /**
+     * Função responsável por alterar o intervalo para a verificação de
+     * conexão.
+     * @param Request      $request
+     */
     public function setInterval(Request $request){
         $interval = Interval::get()->first();
 
@@ -40,26 +49,10 @@ class IntervalController extends Controller
         }
     }
 
-    public function sync()
-    {
-        $interval = Interval::get()->first();
-        $alarm = Alarm::get()->first();
-
-        $interval = $this->formatIntervalToPublish($interval->time);
-
-        if($alarm->mode){ //Modo Acidente
-            $alarmMode = 1;
-            
-        } else {//Modo Furto
-            $alarmMode = 0;
-        }
-
-        $this->publish('syncIntervalOutTopic', $interval);
-        $this->publish('syncAlarmOutTopic', $alarmMode);
-
-        return redirect()->back()->with('success','Sincronização realizada com sucesso!');
-    }
-
+    /**
+     * Função responsável por alterar o modo do alarme.
+     * @param Request      $request
+     */
     public function alarmMode(Request $request)
     {
         $alarm = Alarm::get()->first();
@@ -84,6 +77,36 @@ class IntervalController extends Controller
         return redirect()->back();
     }
 
+        /**
+     * Função responsável por sincronizar o intervalo e o modo do alarme
+     * que estão salvos no banco de dados com a placa.
+     */
+    public function sync()
+    {
+        $interval = Interval::get()->first();
+        $alarm = Alarm::get()->first();
+
+        $interval = $this->formatIntervalToPublish($interval->time);
+
+        if($alarm->mode){ //Modo Acidente
+            $alarmMode = 1;
+            
+        } else {//Modo Furto
+            $alarmMode = 0;
+        }
+
+        $this->publish('syncIntervalOutTopic', $interval);
+        $this->publish('syncAlarmOutTopic', $alarmMode);
+
+        return redirect()->back()->with('success','Sincronização realizada com sucesso!');
+    }
+
+    /**
+     * Função responsável por formatar o tempo que é exibido na página de
+     * ajustes
+     * @param string      $time
+     * @return string
+     */
     private function formatInterval($time){
 
         $temp = explode(':', $time);
