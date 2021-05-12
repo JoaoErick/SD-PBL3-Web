@@ -31,7 +31,14 @@
             </label>
 
             <label class="switch">
-                <input type="checkbox" name="mode" onclick="document.getElementById('alarm_form').submit();">
+                <input 
+                    type="checkbox" 
+                    name="mode" 
+                    onclick="document.getElementById('alarm_form').submit();"
+                    @if ($alarmMode)
+                        checked
+                    @endif
+                >
                 <span class="slider round"></span>
             </label>
 
