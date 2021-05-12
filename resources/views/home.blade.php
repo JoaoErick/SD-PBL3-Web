@@ -34,14 +34,15 @@
 <script>
 
     function verifyConnection() {
+        setInterval(function () {
+            document.getElementById("form").submit();
+        }, <?php echo $interval; ?>);
 
-            setInterval(function () {
-                document.getElementById("form").submit();
-            }, 5000);
-        }
+    }
 
-        document.addEventListener('DOMContentLoaded', function() {
-            verifyConnection();
-        });
+    document.addEventListener('DOMContentLoaded', function() {
+        verifyConnection();
+    });
+        
 </script>
 @endsection
