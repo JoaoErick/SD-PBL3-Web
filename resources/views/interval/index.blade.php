@@ -3,7 +3,8 @@
 @section('title', 'Ajustes')
 
 @section('content-css')
-<link rel="stylesheet" href="{{ asset('css/interval.css') }}"> 
+<link rel="stylesheet" href="{{ asset('css/interval.css') }}">
+<link rel="stylesheet" href="{{ asset('css/switch.css') }}">
 @endsection
 
 @section('content')
@@ -18,10 +19,33 @@
     </div>
 </form>
 
+<form action="{{ route('alarmMode') }}" method="post" id="alarm_form" onsubmit="return false">
+    @csrf
+    <div class="row row-interval">
+        <div class="col-md-12 d-flex justify-content-center align-items-center mt-2">
+            <span class="title-interval">Alarme:</span> 
+        </div>
+        <div class="col-md-12 d-flex justify-content-center align-items-center">
+            <label class="form-check-label mx-2" style="color: #fff">
+                Acidente
+            </label>
+
+            <label class="switch">
+                <input type="checkbox" name="mode" onclick="document.getElementById('alarm_form').submit();">
+                <span class="slider round"></span>
+            </label>
+
+            <label class="form-check-label mx-2" style="color: #fff">
+                Furto
+            </label>
+        </div>
+    </div>
+</form>
+
 <form action="{{ route('setInterval') }}" method="post">
     @csrf
     <div class="row row-interval">
-        <div class="col-md-12 d-flex justify-content-center align-items-center mt-5">
+        <div class="col-md-12 d-flex justify-content-center align-items-center mt-2">
             <span class="title-interval">Notificar a falta de conexão a cada:</span> 
         </div>
         <div class="col-md-12 d-flex justify-content-center align-items-center mb-5">
