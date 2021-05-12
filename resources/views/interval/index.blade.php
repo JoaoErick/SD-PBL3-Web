@@ -7,6 +7,17 @@
 @endsection
 
 @section('content')
+<form action="{{ route('sync') }}" method="post" id="sync_form" onsubmit="return false">
+    @csrf
+    <div class="row mt-3">
+        <div class="col-12">
+            <a class="mx-3 navbar-brand refresh-icon" onclick="document.getElementById('sync_form').submit();">
+                <i class="fas fa-sync-alt"></i> Sincronizar
+            </a>
+        </div>
+    </div>
+</form>
+
 <form action="{{ route('setInterval') }}" method="post">
     @csrf
     <div class="row row-interval">
