@@ -36,7 +36,7 @@ class Interval extends Model
     }
 
     /**
-     * Função para converter o horário do formato H:m:s para milissegundos
+     * Função para converter segundos para milissegundos
      * @param string       $time
      */
     private static function convertToMilis($timeInSeconds)
