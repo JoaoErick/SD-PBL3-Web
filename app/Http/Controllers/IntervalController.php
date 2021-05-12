@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Alarm;
 use Illuminate\Http\Request;
 use App\Models\Interval;
 use PhpMqtt\Client\Facades\MQTT;
@@ -10,7 +11,12 @@ class IntervalController extends Controller
 {
     public function index(){
         $interval = Interval::get()->first();
-        return view('interval.index', ['interval' => $this->formatInterval($interval->time)]);
+        $alarm = Alarm::get()->first();
+
+        return view('interval.index', [
+            'interval' => $this->formatInterval($interval->time),
+            'alarmMode' => $alarm->mode
+        ]);
     }
 
     public function setInterval(Request $request){
@@ -20,7 +26,7 @@ class IntervalController extends Controller
 
         $this->publish('intervalOutTopic', $intervalPublish);
 
-        $status = $this->validateSetInterval();
+        $status = $this->validatePublish('intervalInTopic');
 
         if($status == "success"){
             $interval->time = $request->time;
@@ -42,6 +48,28 @@ class IntervalController extends Controller
         $this->publish('syncOutTopic', $interval);
 
         return redirect()->back()->with('success','Intervalo sincronizado com sucesso!');
+    }
+
+    public function alarmMode(Request $request)
+    {
+        $alarm = Alarm::get()->first();
+
+        if($request->mode == null){ //Modo Acidente
+            $alarm->mode = false;
+            
+        } else {//Modo Furto
+            $alarm->mode = true;
+        }
+
+        $this->publish('alarmOutTopic', $alarm->mode);
+
+        $status = $this->validatePublish('alarmInTopic');
+
+        if($status == "success"){
+            $alarm->save();
+        } 
+        
+        return redirect()->back();
     }
 
     private function formatInterval($time){
@@ -99,11 +127,11 @@ class IntervalController extends Controller
      * Função responsável por validar se a ação foi realizada com sucesso.
      * @return string
      */
-    private function validateSetInterval()
+    private function validatePublish($topic)
     {
         $mqtt = MQTT::connection();
 
-        $mqtt->subscribe('intervalInTopic', function (string $topic, string $message, bool $retained) use ($mqtt) {
+        $mqtt->subscribe($topic, function (string $topic, string $message, bool $retained) use ($mqtt) {
             $this->message = $message;
             
             $mqtt->interrupt();
