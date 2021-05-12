@@ -13,12 +13,12 @@ thead tr th, tbody tr th{
 
 .refresh-icon{
     font-size: 20pt;
-    color: #fff;
+    color: #fff !important;
     transition: .3s;
 }
 
 .refresh-icon:hover{
-    color: rgb(185, 185, 185);
+    color: rgb(185, 185, 185) !important;
     cursor: pointer;
 }
 

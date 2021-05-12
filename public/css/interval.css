@@ -20,3 +20,14 @@
 .row-interval{
     margin-top: 60pt;
 }
+
+.refresh-icon{
+    font-size: 20pt;
+    color: #fff !important;
+    transition: .3s;
+}
+
+.refresh-icon:hover{
+    color: rgb(185, 185, 185) !important;
+    cursor: pointer;
+}
