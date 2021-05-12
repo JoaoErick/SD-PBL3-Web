@@ -12,7 +12,7 @@
         <div class="row mt-3">
             <div class="col-12">
                 <a class="mx-3 navbar-brand refresh-icon" onclick="document.getElementById('refresh_form').submit();">
-                    <i class="fas fa-sync-alt"></i> Atualizar
+                    <i class="bi bi-arrow-counterclockwise"></i> Atualizar
                 </a>
             </div>
         </div>
