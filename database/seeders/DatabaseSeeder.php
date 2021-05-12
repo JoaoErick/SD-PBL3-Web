@@ -15,5 +15,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(ConnectionSeeder::class);
         $this->call(IntervalSeeder::class);
+        $this->call(AlarmSeeder::class);
     }
 }
