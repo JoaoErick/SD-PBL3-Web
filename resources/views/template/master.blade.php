@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="{{ asset('images/biker-guard-favicon.ico') }}" type="image/x-icon">
     <title>BikerGuard - @yield('title')</title>
 
     <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
@@ -16,7 +17,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #001c40">
         <div class="container-fluid">
             <a class="mx-3 navbar-brand" href="{{ route('home') }}">
-                <img src="{{ asset('images/BikerGuard-icon.png') }}" width="40px" alt="">
+                <img src="{{ asset('images/icon-biker-guard.png') }}" width="40px" alt="">
                 BikerGuard
               </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
