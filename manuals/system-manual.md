@@ -199,8 +199,15 @@ php artisan migrate --seed
 5. Em **Instrução da consulta da regra**, substitua ``'iot/topic'`` por ``'connectionInTopic'``;
 6. Em **Definir uma ou mais ações** clique em **Adicionar ação**, selecione a opção **Chamar uma função Lambda transmitindo a mensagem de dados**, depois clique em **Configurar ação**;
 7. Nessa nova página, selecione a função Lambda correspondente à ``connection_lambda_function.zip``;
-8. Repita este mesmo procedimento para as seguintes funções lambdas, substituindo o ``'iot/topic'`` pelos tópicos entre parênteses: ``historic_lambda_function.zip`` (``dailyHistoricInTopic``) e ``alarm_mode_lambda_function.zip`` (``alarmModeInTopic``).
-
+8. Repita este mesmo procedimento para as seguintes funções lambdas, substituindo o ``'iot/topic'`` pelos tópicos entre parênteses: ``historic_lambda_function.zip`` (``dailyHistoricInTopic``) e ``alarm_mode_lambda_function.zip`` (``alarmModeInTopic``);
+9. Em todas as funções Lambda, altere as Credenciais do RDS:
+```python
+#--------------- Credenciais do RDS ----------------------
+rds_host  = "endpoint_do_RDS"
+name = "nome_do_usuario_do_banco_de_dados"
+password = "senha_do_banco_de_dados"
+db_name = "nome_do_banco_de_dados"
+```
 ---
 
 ## Alexa Voice Service
