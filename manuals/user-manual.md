@@ -52,7 +52,7 @@ canto superior esquerdo.
 
 ---
 
-## [Página de Histórico](http://techbulb-env.eba-9iwqr9sh.us-east-1.elasticbeanstalk.com/historic)
+## [Página de Histórico](http://bikerguard-env.eba-32kbmghs.us-east-1.elasticbeanstalk.com/historic)
 
 ### Tabela de Histórico
 Nesta página são exibidos os eventos que ocorreram durante as últimas 24 horas.
