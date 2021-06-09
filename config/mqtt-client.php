@@ -5,11 +5,11 @@ declare(strict_types=1);
 use PhpMqtt\Client\MqttClient;
 use PhpMqtt\Client\Repositories\MemoryRepository;
 
-define("MQTT_HOST", 'a1eb2rhzwlwckg-ats.iot.us-east-1.amazonaws.com');
+define("MQTT_HOST", 'seuEndpoint');
 define("MQTT_PORT", 8883);
 define("CA_PATH", __DIR__.'/../data/AmazonRootCA1.pem');
-define("CERTIFICATE_PATH",__DIR__.'/../data/93c0ad865a-certificate.pem.crt');
-define("PRIVATE_KEY_PATH", __DIR__.'/../data/93c0ad865a-private.pem.key');
+define("CERTIFICATE_PATH",__DIR__.'/../data/xxxxxxxxxx-certificate.pem.crt');
+define("PRIVATE_KEY_PATH", __DIR__.'/../data/xxxxxxxxxx-private.pem.key');
 
 return [
 
