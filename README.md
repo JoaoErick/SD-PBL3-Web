@@ -15,7 +15,7 @@
 ------------
 
 ## 📚 Descrição ##
-Aplicação Web destinada à resolução do problema três do MI - Sistemas Digistais (TEC 499).
+Aplicação Web destinada à resolução do problema três do MI - Sistemas Digistais (TEC 499) - [Universidade Estadual de Feira de Santana (UEFS)](https://www.uefs.br/).
 
 O objetivo desta, é realizar a verificação de conexão do dispositivo, realizar ajustes no modo do alarme e no intervalo de verificação de conexão, além da 
 exibição do histórico de eventos que aconteceram nas últimas 24 horas.
